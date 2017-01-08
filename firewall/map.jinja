@@ -1,0 +1,57 @@
+{##
+# set global defaults
+##}
+{% set firewall_defaults = {
+  'firewall':
+  {
+    'firewalld':
+    {
+      'status': 'Active',
+      'default_zone': 'internal',
+    },
+    'iptables':
+    {
+      'status': 'Active',
+    },
+    'ip6tables':
+    {
+      'status': 'InActive',
+    },
+  },
+} %}
+
+{##
+# merge the default settings with Salt pillar data
+##}
+{% set firewall = salt['pillar.get']('firewall', default=firewall_defaults.firewall, merge=True) %}
+
+{##
+# set the include files based on the OS and osmajorrelease grain
+##}
+{% set os_ver_lookup = {
+  'RedHat':
+  {
+    '7':
+    {
+      'include': 'firewalld',
+    },
+    '6':
+    {
+      'include': 'iptables',
+    },
+  },
+  'CentOS':
+  {
+    '7':
+    {
+      'include': 'firewalld',
+    },
+    '6':
+    {
+      'include': 'iptables',
+    },
+  },
+} %}
+
+{% set os_ver_map = os_ver_lookup.get(grains.os, {}) %}
+{% set include_file = os_ver_map.get(grains.osmajorrelease, {}) %}

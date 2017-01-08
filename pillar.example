@@ -1,0 +1,11 @@
+# Set firewall status to Active or InActive globally
+# Active enables the service
+# InActive disables the service
+firewall
+  firewalld:
+    status: Active
+    default_zone: internal
+  iptables:
+    status: Active
+  ip6tables:
+    status: InActive
