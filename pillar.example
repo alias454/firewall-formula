@@ -1,7 +1,7 @@
 # Set firewall status to Active or InActive globally
 # Active enables the service
 # InActive disables the service
-firewall
+firewall:
   firewalld:
     status: Active
     default_zone: internal
