@@ -1,14 +1,16 @@
 {% if salt['pillar.get']('firewall:firewalld:status') == 'Active' %}
 
 service-iptables:
-  service.disabled:
+  service.dead:
     - name: iptables
     - enable: False
+    - unless: systemctl is-active iptables |grep inactive
     
 service-ip6tables:
-  service.disabled:
+  service.dead:
     - name: ip6tables
     - enable: False
+    - unless: systemctl is-active ip6tables |grep inactive
 
 package-firewalld:
   pkg.installed:
@@ -42,5 +44,6 @@ service-firewalld:
   service.dead:
     - name: firewalld
     - enable: False
+    - unless: systemctl is-active firewalld |grep inactive
 
 {% endif %}
