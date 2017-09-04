@@ -1,6 +1,4 @@
-{##
-# set global defaults
-##}
+# Set global defaults
 {% set firewall_defaults = {
   'firewall':
   {
@@ -20,33 +18,29 @@
   },
 } %}
 
-{##
-# merge the default settings with Salt pillar data
-##}
+# Merge the default settings with Salt pillar data
 {% set firewall = salt['pillar.get']('firewall', default=firewall_defaults.firewall, merge=True) %}
 
-{##
-# set the include files based on the OS and osmajorrelease grain
-##}
+# Set the include files based on the OS and osmajorrelease grain
 {% set os_ver_lookup = {
   'RedHat':
   {
-    '7':
+    7:
     {
       'include': 'firewalld',
     },
-    '6':
+    6:
     {
       'include': 'iptables',
     },
   },
   'CentOS':
   {
-    '7':
+    7:
     {
       'include': 'firewalld',
     },
-    '6':
+    6:
     {
       'include': 'iptables',
     },
