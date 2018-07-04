@@ -1,4 +1,5 @@
 {% if salt['pillar.get']('firewall:iptables:status') == 'Active' %}
+{% from "firewall/map.jinja" import config with context %}
 
 service-firewalld:
   service.dead:
@@ -12,7 +13,7 @@ package-iptables:
 
 service-iptables:
   service.running:
-    - name: iptables
+    - name: {{ config.service }}
     - enable: True
 
 {% if salt['pillar.get']('firewall:ip6tables:status') == 'Active' %}

@@ -5,7 +5,7 @@ service-iptables:
     - name: iptables
     - enable: False
     - unless: systemctl is-active iptables |grep inactive
-    
+
 service-ip6tables:
   service.dead:
     - name: ip6tables

@@ -2,7 +2,7 @@
 firewall-formula
 ================
 
-A saltstack formula that can be used to manage iptables or firewalld services on RHEL based systems.
+A saltstack formula that can be used to manage iptables or firewalld services on RHEL or Debian based systems.
 
 .. note::
 
@@ -24,4 +24,4 @@ Disables iptables modules if they exist.
 ``iptables``
 ------------
 
-Sets up the iptables service and makes sure it is running on RHEL/CentOS 6 systems.
+Sets up the iptables service and makes sure it is running on RHEL/CentOS 6 and Debian systems.

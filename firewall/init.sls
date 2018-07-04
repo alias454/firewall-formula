@@ -1,4 +1,4 @@
-{% from "firewall/map.jinja" import include_file with context %}
+{% from "firewall/map.jinja" import config with context %}
 
 include:
-  - .{{ include_file.include }}
+  - .{{ config.include }}
